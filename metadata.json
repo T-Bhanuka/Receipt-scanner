@@ -1,0 +1,7 @@
+{
+  "name": "SmartScan Receipt Pro",
+  "description": "A high-performance receipt scanner and budget tracker with AI-powered categorization and spending insights.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
