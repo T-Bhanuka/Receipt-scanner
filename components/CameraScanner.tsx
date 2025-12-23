@@ -105,15 +105,15 @@ const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => 
         )}
       </div>
 
-      <div className="p-10 bg-slate-900 flex justify-center items-center border-t border-slate-800">
+      <div className="p-6 md:p-10 bg-slate-900 flex justify-center items-center border-t border-slate-800">
         <button 
           onClick={captureImage}
           disabled={!!error}
-          className="group relative w-24 h-24 flex items-center justify-center disabled:opacity-50 transition-all active:scale-90"
+          className="group relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center disabled:opacity-50 transition-all active:scale-90"
         >
           <div className="absolute inset-0 bg-purple-600 blur-2xl opacity-40 group-hover:opacity-60 transition-opacity"></div>
-          <div className="relative w-20 h-20 bg-white rounded-full border-[6px] border-slate-950 shadow-2xl flex items-center justify-center">
-             <div className="w-16 h-16 rounded-full border-2 border-slate-200"></div>
+          <div className="relative w-16 h-16 md:w-20 md:h-20 bg-white rounded-full border-[6px] border-slate-950 shadow-2xl flex items-center justify-center">
+             <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-slate-200"></div>
           </div>
         </button>
       </div>
