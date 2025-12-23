@@ -150,6 +150,16 @@ const App: React.FC = () => {
     }));
   };
 
+  const deleteReceipt = (receiptId: string) => {
+    if (!confirm('Delete this bill? This action cannot be undone.')) return;
+    setReceipts(prev => prev.filter(r => r.id !== receiptId));
+  };
+
+  const deleteAllReceipts = () => {
+    if (!confirm('Delete ALL bills? This will remove your entire bill archive.')) return;
+    setReceipts([]);
+  };
+
   const handleManualSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const total = manualForm.items.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
@@ -294,12 +304,20 @@ const App: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
                 Bill Archive
               </h2>
-              <button 
-                onClick={() => setShowManualEntry(true)}
-                className="text-xs font-bold px-3 py-1.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-lg hover:bg-indigo-500/30 transition-all"
-              >
-                + Add Manual
-              </button>
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => setShowManualEntry(true)}
+                  className="text-xs font-bold px-3 py-1.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-lg hover:bg-indigo-500/30 transition-all"
+                >
+                  + Add Manual
+                </button>
+                <button
+                  onClick={deleteAllReceipts}
+                  className="text-xs font-bold px-3 py-1.5 bg-red-500/10 text-red-300 border border-red-500/20 rounded-lg hover:bg-red-500/20 transition-all"
+                >
+                  Clear All
+                </button>
+              </div>
             </div>
             {receipts.length === 0 ? (
                <div className="py-24 bg-slate-900/40 rounded-3xl border border-slate-800 border-dashed text-center">
@@ -317,8 +335,16 @@ const App: React.FC = () => {
                         <span>{receipt.time}</span>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right flex flex-col items-end gap-2">
                       <span className="text-2xl font-black text-white">Rs. {receipt.total.toLocaleString()}</span>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => deleteReceipt(receipt.id)}
+                          className="text-red-400 text-xs font-bold px-2 py-1 bg-red-500/10 rounded-lg hover:bg-red-500/20"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="space-y-2">
